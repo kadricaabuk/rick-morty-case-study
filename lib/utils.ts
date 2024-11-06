@@ -18,9 +18,6 @@ export const getCharacters = async (filters?: {
   gender?: string;
 }) => {
   const { name = "", status = "", type = "", gender = "" } = filters || {};
-
-  console.log(`https://rickandmortyapi.com/api/character?name=${name}&status=${status}&gender=${gender}&type=${type}`)
-
   const response = await fetch(
     `https://rickandmortyapi.com/api/character?name=${name}&status=${status}&gender=${gender}&type=${type}`
   );
