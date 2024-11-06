@@ -7,8 +7,6 @@ import { getCharacters } from '@/lib/utils';
 import Character from './character';
 import NoCharacterFound from './no-character-found';
 import { LoaderPinwheel } from 'lucide-react';
-import { Pagination } from '@/components/ui/pagination';
-
 const Characters = () => {
     const { name, status, type, gender } = useFilterStore()
     
@@ -28,7 +26,6 @@ const Characters = () => {
                     </Fragment>
                 ))
             }
-            <Pagination />
         </div>
     )
 }
