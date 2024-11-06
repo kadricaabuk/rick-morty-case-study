@@ -1,11 +1,13 @@
-// _components/FilterControls.tsx
 'use client'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useFilterStore } from '@/lib/stores/filterStore'
 import { Button } from '@/components/ui/button'
 import { X } from 'lucide-react'
+import { useRouter, useSearchParams } from 'next/navigation'
 
 const Filters = () => {
+    const router = useRouter()
+    const searchParams = useSearchParams()
     const { name, status, type, gender, setFilters } = useFilterStore()
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -19,6 +21,28 @@ const Filters = () => {
         type: '',
         gender: '',
     })
+
+    useEffect(() => {
+        const urlParams = {
+            name: searchParams.get('name') || '',
+            status: searchParams.get('status') || '',
+            type: searchParams.get('type') || '',
+            gender: searchParams.get('gender') || ''
+        }
+
+        setFilters(urlParams)
+    }, [searchParams, setFilters])
+
+    useEffect(() => {
+        const queryParams: Record<string, string> = {}
+        if (name) queryParams.name = name
+        if (status) queryParams.status = status
+        if (type) queryParams.type = type
+        if (gender) queryParams.gender = gender
+
+        const queryString = new URLSearchParams(queryParams).toString()
+        router.push(`?${queryString}`)
+    }, [name, status, type, gender, router])
 
     return (
         <div className='mb-4 flex flex-row justify-between w-[95%]'>

@@ -7,6 +7,7 @@ import { getCharacters } from '@/lib/utils';
 import Character from './character';
 import NoCharacterFound from './no-character-found';
 import { LoaderPinwheel } from 'lucide-react';
+
 const Characters = () => {
     const { name, status, type, gender } = useFilterStore()
     
